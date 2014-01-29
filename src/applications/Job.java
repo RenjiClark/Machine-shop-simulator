@@ -4,10 +4,10 @@ import dataStructures.LinkedQueue;
 
 class Job {
     // data members
-    LinkedQueue taskQ; // this job's tasks
-    int length; // sum of scheduled task times
-    int arrivalTime; // arrival time at current queue
-    int id; // job identifier
+    private LinkedQueue taskQ; // this job's tasks
+    private int length; // sum of scheduled task times
+    private int arrivalTime; // arrival time at current queue
+    private int id; // job identifier
 
     // constructor
     Job(int theId) {
@@ -37,4 +37,23 @@ class Job {
     int getFirstMachine(){
     	return ((Task) taskQ.getFrontElement()).machine;
     }
+
+	int getLength() {
+		return length;
+	}
+
+	int getArrivalTime() {
+		return arrivalTime;
+	}
+
+	void setArrivalTime(int arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	int getId() {
+		return id;
+	}
+
+
+
 }
