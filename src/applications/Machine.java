@@ -55,5 +55,18 @@ class Machine {
 	void addToJobQ(Job input){
 		jobQ.put(input);
 	}
+				
+	boolean isIdle(){
+		return activeJob == null;
+	}
+	
+	boolean isJobQEmpty(){
+		return jobQ.isEmpty();
+	}
+	
+	Job removeJob(){
+		return (Job) jobQ.remove();
+	}
+
 	
 }
