@@ -25,7 +25,7 @@ class Job {
      * remove next task of job and return its time also update length
      */
     int removeNextTask() {
-        int theTime = ((Task) taskQ.remove()).time;
+        int theTime = ((Task) taskQ.remove()).getTime();
         length += theTime;
         return theTime;
     }
@@ -35,7 +35,7 @@ class Job {
     }
     
     int getFirstMachine(){
-    	return ((Task) taskQ.getFrontElement()).machine;
+    	return ((Task) taskQ.getFrontElement()).getMachine();
     }
 
 	int getLength() {
