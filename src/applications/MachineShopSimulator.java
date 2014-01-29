@@ -3,7 +3,6 @@
 package applications;
 
 import utilities.MyInputStream;
-import dataStructures.LinkedQueue;
 import exceptions.MyInputException;
 
 public class MachineShopSimulator {
@@ -14,35 +13,6 @@ public class MachineShopSimulator {
     //public static final String EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK = "each job must have >= 1 task";
     //public static final String BAD_MACHINE_NUMBER_OR_TASK_TIME = "bad machine number or task time";
     
-    static class Job {
-        // data members
-        private LinkedQueue taskQ; // this job's tasks
-        private int length; // sum of scheduled task times
-        private int arrivalTime; // arrival time at current queue
-        private int id; // job identifier
-
-        // constructor
-        private Job(int theId) {
-            id = theId;
-            taskQ = new LinkedQueue();
-            // length and arrivalTime have default value 0
-        }
-
-        // other methods
-        private void addTask(int theMachine, int theTime) {
-            taskQ.put(new Task(theMachine, theTime));
-        }
-
-        /**
-         * remove next task of job and return its time also update length
-         */
-        private int removeNextTask() {
-            int theTime = ((Task) taskQ.remove()).time;
-            length += theTime;
-            return theTime;
-        }
-    }
-
     private static class EventList {
         // data members
         int[] finishTime; // finish time array
@@ -98,13 +68,13 @@ public class MachineShopSimulator {
      * @return false iff no next task
      */
     static boolean moveToNextMachine(Job theJob) {
-        if (theJob.taskQ.isEmpty()) {// no next task
+        if (theJob.isTaskQEmpty()) {// no next task
             System.out.println("Job " + theJob.id + " has completed at "
                     + timeNow + " Total wait was " + (timeNow - theJob.length));
             return false;
         } else {// theJob has a next task
                 // get machine for next task
-            int p = ((Task) theJob.taskQ.getFrontElement()).machine;
+            int p = theJob.getFirstMachine();
             // put on machine p's wait queue
             machine[p].addToJobQ(theJob);
             theJob.arrivalTime = timeNow;
