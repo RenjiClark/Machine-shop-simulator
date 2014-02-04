@@ -29,7 +29,7 @@ public class MachineShopSimulator {
      */
     static boolean moveToNextMachine(Job theJob) {
         if (theJob.isTaskQEmpty()) {// no next task
-            System.out.println("Job " + theJob.getId() + " has completed at "
+            System.out.println("Job " + (theJob.getId()+1) + " has completed at "
                     + timeNow + " Total wait was " + (timeNow - theJob.getLength()));
             return false;
         } else {// theJob has a next task
@@ -109,7 +109,7 @@ public class MachineShopSimulator {
         // input the jobs
         Job theJob;
         for (int i = 0; i < numJobs; i++) {
-            System.out.println("Enter number of tasks for job " + i);
+            System.out.println("Enter number of tasks for job " + (i+1));
             int tasks = keyboard.readInteger(); // number of tasks
             int firstMachine = 0; // machine for first task
             if (tasks < 1)
@@ -120,9 +120,9 @@ public class MachineShopSimulator {
             System.out.println("Enter the tasks (machine, time)"
                     + " in process order");
             for (int j = 0; j < tasks; j++) {// get tasks for job i
-                int theMachine = keyboard.readInteger();
+                int theMachine = keyboard.readInteger()-1;
                 int theTaskTime = keyboard.readInteger();
-                if (theMachine < 1 || theMachine > numMachines
+                if (theMachine < 0 || theMachine > numMachines
                         || theTaskTime < 1)
                     throw new MyInputException("bad machine number or task time");
                 if (j == 0)
@@ -157,7 +157,8 @@ public class MachineShopSimulator {
     static void outputStatistics() {
         System.out.println("Finish time = " + timeNow);
         for (int p = 0; p < numMachines; p++) {
-            System.out.println("Machine " + p + " completed "
+        	int realIndex = p+1;
+            System.out.println("Machine " + realIndex + " completed "
                     + machine[p].getNumTasks() + " tasks");
             System.out.println("The total wait time was "
                     + machine[p].getTotalWait());

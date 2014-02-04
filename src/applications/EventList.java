@@ -21,7 +21,7 @@ class EventList {
     int nextEventMachine() {
         // find first machine to finish, this is the
         // machine with smallest finish time
-        int p = 1;
+        int p = 0;
         int t = finishTime[0];
         for (int i = 1; i < finishTime.length; i++)
             if (finishTime[i] < t) {// i finishes earlier

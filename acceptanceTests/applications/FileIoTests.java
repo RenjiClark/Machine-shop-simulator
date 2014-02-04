@@ -60,7 +60,7 @@ public class FileIoTests {
         System.err.println("Processing input file: <" + inputFile + ">");
         FileInputStream fileInputStream = new FileInputStream(directory + inputFile);
         System.setIn(fileInputStream);
-        File outputFile = File.createTempFile("simulator", ".ouptut");
+        File outputFile = File.createTempFile("simulator", ".output");
         PrintStream filePrintStream = new PrintStream(outputFile);
         System.setOut(filePrintStream);
         MachineShopSimulator.main(new String[] { });
