@@ -88,14 +88,19 @@ public class MachineShopSimulator {
 		System.out.println("Enter number of machines and jobs");
 		numMachines = keyboard.readInteger();
 		numJobs = keyboard.readInteger();
-		if (numMachines < 1 || numJobs < 1)
+		if (numMachines < 1 || numJobs < 1){
 			throw new MyInputException("number of machines and jobs must be >= 1");
+		}
 
 		// create event and machine queues
 		eList = new EventList(numMachines, largeTime);
 		machine = new Machine[numMachines];
 
-		// input the change-over times
+		populateMachineList(keyboard);
+		inputJobData(keyboard);
+	}
+
+	private static void populateMachineList(MyInputStream keyboard) {
 		System.out.println("Enter change-over times for machines");
 		for (int i = 0; i < numMachines; i++) {
 			int ct = keyboard.readInteger();
@@ -103,8 +108,6 @@ public class MachineShopSimulator {
 				throw new MyInputException("change-over time must be >= 0");
 			machine[i] = new Machine(ct);
 		}
-
-		inputJobData(keyboard);
 	}
 
 	private static void inputJobData(MyInputStream keyboard) {
