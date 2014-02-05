@@ -104,8 +104,10 @@ public class MachineShopSimulator {
             machine[i] = new Machine(ct);
         }
 
-        // input the jobs
-        Job theJob;
+        inputJobData(keyboard);
+    }
+
+	private static void inputJobData(MyInputStream keyboard) {
         for (int i = 0; i < numJobs; i++) {
             System.out.println("Enter number of tasks for job " + (i+1));
             int tasks = keyboard.readInteger(); // number of tasks
@@ -114,7 +116,7 @@ public class MachineShopSimulator {
                 throw new MyInputException("each job must have >= 1 task");
 
             // create the job
-            theJob = new Job(i);
+            Job theJob = new Job(i);
             System.out.println("Enter the tasks (machine, time)"
                     + " in process order");
             for (int j = 0; j < tasks; j++) {// get tasks for job i
@@ -129,7 +131,7 @@ public class MachineShopSimulator {
             } // task queue
             machine[firstMachine].addToJobQ(theJob);
         }
-    }
+	}
 
     /** load first jobs onto each machine */
     static void startShop() {
