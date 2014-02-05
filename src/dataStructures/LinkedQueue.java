@@ -7,18 +7,6 @@ public class LinkedQueue implements Queue {
     protected ChainNode front;
     protected ChainNode rear;
 
-    // constructors
-    /** create an empty queue */
-    @Deprecated
-    public LinkedQueue(int initialCapacity) {
-        // the default initial value of front is null
-    }
-
-    @Deprecated
-    public LinkedQueue() {
-        this(0);
-    }
-
     // methods
     /** @return true iff queue is empty */
     public boolean isEmpty() {
@@ -78,7 +66,7 @@ public class LinkedQueue implements Queue {
 
     /** test program */
     public static void main(String[] args) {
-        LinkedQueue q = new LinkedQueue(3);
+        LinkedQueue q = new LinkedQueue();
         // add a few elements
         q.put(new Integer(1));
         q.put(new Integer(2));

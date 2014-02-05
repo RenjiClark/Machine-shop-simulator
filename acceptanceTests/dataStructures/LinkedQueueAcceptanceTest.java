@@ -11,7 +11,7 @@ public class LinkedQueueAcceptanceTest {
      */
     @Test
     public void sahniTest() {
-        LinkedQueue q = new LinkedQueue(3);
+        LinkedQueue q = new LinkedQueue();
         // add a few elements
         q.put(new Integer(1));
         q.put(new Integer(2));
