@@ -10,11 +10,7 @@ class Machine {
     private int numTasks; // number of tasks processed on this machine
     private Job activeJob; // job currently active on this machine
 
-    // constructor
-    Machine() {
-        this.jobQ = new LinkedQueue();
-    }
-    
+    // constructor    
     Machine(int changeTime){
     	this.jobQ = new LinkedQueue();
     	this.changeTime = changeTime;
@@ -34,10 +30,6 @@ class Machine {
 
 	int getChangeTime() {
 		return changeTime;
-	}
-
-	void setChangeTime(int changeTime) {
-		this.changeTime = changeTime;
 	}
 
 	int getTotalWait() {
