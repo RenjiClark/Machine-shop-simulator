@@ -15,6 +15,11 @@ class Machine {
         this.jobQ = new LinkedQueue();
     }
     
+    Machine(int changeTime){
+    	this.jobQ = new LinkedQueue();
+    	this.changeTime = changeTime;
+    }
+    
 	LinkedQueue getJobQ() {
 		return jobQ;
 	}
