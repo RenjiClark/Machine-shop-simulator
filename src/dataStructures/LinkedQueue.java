@@ -9,10 +9,12 @@ public class LinkedQueue implements Queue {
 
     // constructors
     /** create an empty queue */
+    @Deprecated
     public LinkedQueue(int initialCapacity) {
         // the default initial value of front is null
     }
 
+    @Deprecated
     public LinkedQueue() {
         this(0);
     }
