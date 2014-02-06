@@ -26,24 +26,17 @@ public class MachineShopSimulator {
 	 * 
 	 * @return false iff no next task
 	 */
-	
-	static boolean moveToNextMachine(Job theJob) {
-		if (theJob.isTaskQEmpty()) {// no next task
-			System.out.println("Job " + (theJob.getId()+1) + " has completed at "
-					+ timeNow + " Total wait was " + (timeNow - theJob.getLength()));
-			return false;
-		} else {// theJob has a next task
-			// get machine for next task
-			int p = theJob.getFirstMachine();
-			// put on machine p's wait queue
-			machineList.get(p).addToJobQ(theJob);
-			theJob.setArrivalTime(timeNow);
-			// if p idle, schedule immediately
-			if (machineList.getFinishTime(p) == largeTime) {// machine is idle
-				machineList.get(p).changeState(timeNow);
-			}
-			return true;
+
+	static void moveToNextMachine(Job theJob) {
+		int p = theJob.getFirstMachine();
+		// put on machine p's wait queue
+		machineList.get(p).addToJobQ(theJob);
+		theJob.setArrivalTime(timeNow);
+		// if p idle, schedule immediately
+		if (machineList.getFinishTime(p) == largeTime) {// machine is idle
+			machineList.get(p).changeState(timeNow);
 		}
+
 	}
 
 	/**
@@ -91,18 +84,18 @@ public class MachineShopSimulator {
 			// create the job
 			Job theJob = new Job(i);
 			int firstMachine = 0; // machine for first task
-			
+
 			System.out.println("Enter the tasks (machine, time) in process order");
 			for (int j = 0; j < tasks; j++) {// get tasks for job i
 				int theMachine = keyboard.readInteger()-1;
 				int theTaskTime = keyboard.readInteger();
-				
+
 				if (theMachine < 0 || theMachine > numMachines || theTaskTime < 1){
 					throw new MyInputException("bad machine number or task time");
 				}
-				
+
 				if (j == 0) firstMachine = theMachine; // job's first machine
-				
+
 				theJob.addTask(theMachine, theTaskTime); // add to
 			} // task queue
 			machineList.get(firstMachine).addToJobQ(theJob);
@@ -124,8 +117,19 @@ public class MachineShopSimulator {
 			Job theJob = machineList.get(nextToFinish).changeState(timeNow);
 			// move theJob to its next machine
 			// decrement numJobs if theJob has finished
-			if (theJob != null && !moveToNextMachine(theJob))
-				numJobs--;
+
+			if(theJob != null){
+				if(theJob.isTaskQEmpty()){
+					System.out.println("Job " + (theJob.getId()+1) + " has completed at "
+							+ timeNow + " Total wait was " + (timeNow - theJob.getLength()));
+					numJobs--;
+				} else{
+					moveToNextMachine(theJob);
+				}
+			}
+
+			//			if (theJob != null && !moveToNextMachine(theJob)) //!machineList.get(theJob.getFirstMachine()).moveToNextMachine(theJob)
+			//				numJobs--;
 		}
 	}
 

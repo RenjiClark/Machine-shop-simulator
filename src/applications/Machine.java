@@ -17,21 +17,9 @@ class Machine {
     	this.changeTime = changeTime;
     	finishTime = Integer.MAX_VALUE;
     }
-    
-	LinkedQueue getJobQ() {
-		return jobQ;
-	}
-
-	Job getActiveJob() {
-		return activeJob;
-	}
 
 	void setActiveJob(Job activeJob) {
 		this.activeJob = activeJob;
-	}
-
-	int getChangeTime() {
-		return changeTime;
 	}
 
 	int getTotalWait() {
@@ -77,7 +65,7 @@ class Machine {
 	public Job changeState(int timeNow) {// Task on theMachine has finished,
 		// schedule next one.
 		
-		Job lastJob = getActiveJob();
+		Job lastJob = activeJob;
 
 		if (isIdle()) {// in idle or change-over
 			// state
@@ -86,15 +74,15 @@ class Machine {
 				finishTime = Integer.MAX_VALUE;
 			else {// take job off the queue and work on it
 				setActiveJob(removeJob());
-				setTotalWait(getTotalWait() + (timeNow - getActiveJob().getArrivalTime()));
+				setTotalWait(getTotalWait() + (timeNow - activeJob.getArrivalTime()));
 				setNumTasks(getNumTasks() + 1);
-				int t = getActiveJob().removeNextTask();
+				int t = activeJob.removeNextTask();
 				finishTime = timeNow + t;
 			}
 		} else {// task has just finished on currentMachine
 			// schedule change-over time
 			setActiveJob(null);
-			finishTime = timeNow + getChangeTime();
+			finishTime = timeNow + changeTime;
 		}
 
 		return lastJob;
