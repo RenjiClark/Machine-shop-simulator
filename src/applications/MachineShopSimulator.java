@@ -38,7 +38,7 @@ public class MachineShopSimulator {
 			machineList.get(p).addToJobQ(theJob);
 			theJob.setArrivalTime(timeNow);
 			// if p idle, schedule immediately
-			if (machineList.nextEventTime(p) == largeTime) {// machine is idle
+			if (machineList.getFinishTime(p) == largeTime) {// machine is idle
 				changeState(p);
 			}
 			return true;
@@ -147,7 +147,7 @@ public class MachineShopSimulator {
 	static void simulate() {
 		while (numJobs > 0) {// at least one job left
 			int nextToFinish = machineList.nextEventMachine();
-			timeNow = machineList.nextEventTime(nextToFinish);
+			timeNow = machineList.getFinishTime(nextToFinish);
 			// change job on machine nextToFinish
 			Job theJob = changeState(nextToFinish);
 			// move theJob to its next machine

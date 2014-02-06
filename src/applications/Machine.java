@@ -15,6 +15,7 @@ class Machine {
     Machine(int changeTime){
     	this.jobQ = new LinkedQueue();
     	this.changeTime = changeTime;
+    	finishTime = Integer.MAX_VALUE;
     }
     
 	LinkedQueue getJobQ() {
