@@ -74,7 +74,7 @@ class Machine {
 		this.finishTime = finishTime;
 	}
 	
-	public Job changeState(int theMachine, int timeNow) {// Task on theMachine has finished,
+	public Job changeState(int timeNow) {// Task on theMachine has finished,
 		// schedule next one.
 		
 		Job lastJob = getActiveJob();
