@@ -26,6 +26,7 @@ public class MachineShopSimulator {
 	 * 
 	 * @return false iff no next task
 	 */
+	
 	static boolean moveToNextMachine(Job theJob) {
 		if (theJob.isTaskQEmpty()) {// no next task
 			System.out.println("Job " + (theJob.getId()+1) + " has completed at "
@@ -50,6 +51,7 @@ public class MachineShopSimulator {
 	 * 
 	 * @return last job run on this machine
 	 */
+	@Deprecated
 	static Job changeState(int theMachine) {// Task on theMachine has finished,
 		// schedule next one.
 		

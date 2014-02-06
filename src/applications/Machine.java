@@ -73,6 +73,31 @@ class Machine {
 	public void setFinishTime(int finishTime) {
 		this.finishTime = finishTime;
 	}
+	
+	public Job changeState(int theMachine, int timeNow) {// Task on theMachine has finished,
+		// schedule next one.
+		
+		Job lastJob = getActiveJob();
 
+		if (isIdle()) {// in idle or change-over
+			// state
+			// wait over, ready for new job
+			if (isJobQEmpty()) // no waiting job
+				finishTime = Integer.MAX_VALUE;
+			else {// take job off the queue and work on it
+				setActiveJob(removeJob());
+				setTotalWait(getTotalWait() + (timeNow - getActiveJob().getArrivalTime()));
+				setNumTasks(getNumTasks() + 1);
+				int t = getActiveJob().removeNextTask();
+				finishTime = timeNow + t;
+			}
+		} else {// task has just finished on currentMachine
+			// schedule change-over time
+			setActiveJob(null);
+			finishTime = timeNow + getChangeTime();
+		}
+
+		return lastJob;
+	}
 	
 }
