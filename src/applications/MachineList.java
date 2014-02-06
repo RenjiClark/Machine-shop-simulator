@@ -1,7 +1,9 @@
 package applications;
 
 public class MachineList {
-	private Machine[] machine; // array of machines
+	private Machine[] machineList; // array of machines
+	
+	@Deprecated
 	private int[] finishTime; // finish time array
 	private int currentIndex;	
 	
@@ -9,29 +11,29 @@ public class MachineList {
 		if (numMachines < 1)
             throw new IllegalArgumentException("number of machines must be >= 1");
 		
-		machine = new Machine[numMachines];
+		machineList = new Machine[numMachines];
 		finishTime = new int[numMachines];
 		currentIndex = 0;
 		
 		for (int i = 0; i < numMachines; i++){
-            finishTime[i] = Integer.MAX_VALUE;
+            setFinishTime(i, Integer.MAX_VALUE);
 		}
 	}
 	
 	public Machine[] getMachine() {
-		return machine;
+		return machineList;
 	}
 
 	public void setMachine(Machine[] machine) {
-		this.machine = machine;
+		this.machineList = machine;
 	}
 	
 	public Machine get(int index){
-		return machine[index];
+		return machineList[index];
 	}
 	
 	public void add(Machine input){
-		machine[currentIndex] = input;
+		machineList[currentIndex] = input;
 		currentIndex++;
 	}
 
@@ -41,7 +43,7 @@ public class MachineList {
         // machine with smallest finish time
         int p = 0;
         int t = finishTime[0];
-        for (int i = 1; i < finishTime.length; i++)
+        for (int i = 1; i < machineList.length; i++)
             if (finishTime[i] < t) {// i finishes earlier
                 p = i;
                 t = finishTime[i];
@@ -56,5 +58,9 @@ public class MachineList {
 
     void setFinishTime(int theMachine, int theTime) {
         finishTime[theMachine] = theTime;
+    }
+    
+    private int getFinishTime(int index){
+    	return machineList[index].getFinishTime();
     }
 }

@@ -9,6 +9,7 @@ class Machine {
     private int totalWait; // total delay at this machine
     private int numTasks; // number of tasks processed on this machine
     private Job activeJob; // job currently active on this machine
+    private int finishTime;
 
     // constructor    
     Machine(int changeTime){
@@ -62,6 +63,14 @@ class Machine {
 	
 	Job removeJob(){
 		return (Job) jobQ.remove();
+	}
+
+	public int getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(int finishTime) {
+		this.finishTime = finishTime;
 	}
 
 	
