@@ -27,6 +27,10 @@ public class MachineShopSimulator {
 	 * @return false iff no next task
 	 */
 
+	//Reasoning as to why this method is still here:
+	//Ideally we would move this method into Machine.java, however the line that calls moveToNextMachine
+	//would need to be changed from "moveToNextMachine(theJob);" to
+	//"machineList.get(theJob.getFirstMachine()).moveToNextMachine(theJob);"
 	static void moveToNextMachine(Job theJob) {
 		int p = theJob.getFirstMachine();
 		// put on machine p's wait queue
@@ -67,8 +71,9 @@ public class MachineShopSimulator {
 		for (int i = 0; i < numJobs; i++) {
 			System.out.println("Enter number of tasks for job " + (i+1));
 			int tasks = keyboard.readInteger(); // number of tasks
-			if (tasks < 1)
+			if (tasks < 1){
 				throw new MyInputException("each job must have >= 1 task");
+			}
 
 			// create the job
 			Job theJob = new Job(i);
@@ -109,12 +114,9 @@ public class MachineShopSimulator {
 							+ timeNow + " Total wait was " + (timeNow - theJob.getLength()));
 					numJobs--;
 				} else{
-					moveToNextMachine(theJob);
+					moveToNextMachine(theJob); //machineList.get(theJob.getFirstMachine()).moveToNextMachine(theJob)
 				}
 			}
-
-			//			if (theJob != null && !moveToNextMachine(theJob)) //!machineList.get(theJob.getFirstMachine()).moveToNextMachine(theJob)
-			//				numJobs--;
 		}
 	}
 
