@@ -31,7 +31,7 @@ public class MachineShopSimulator {
 	//Ideally we would move this method into Machine.java, however the line that calls moveToNextMachine
 	//would need to be changed from "moveToNextMachine(theJob);" to
 	//"machineList.get(theJob.getFirstMachine()).moveToNextMachine(theJob);"
-	static void moveToNextMachine(Job theJob) {
+	private static void moveToNextMachine(Job theJob) {
 		int p = theJob.getFirstMachine();
 		// put on machine p's wait queue
 		machineList.get(p).addToJobQ(theJob);
@@ -50,7 +50,7 @@ public class MachineShopSimulator {
 	 */
 
 	/** input machine shop data */
-	static void inputData() {
+	private static void inputData() {
 		// define the input stream to be the standard input stream
 		MyInputStream keyboard = new MyInputStream();
 
@@ -99,7 +99,7 @@ public class MachineShopSimulator {
 
 
 	/** process all jobs to completion */
-	static void simulate() {
+	private static void simulate() {
 		while (numJobs > 0) {// at least one job left
 			int nextToFinish = machineList.nextEventMachine();
 			timeNow = machineList.getFinishTime(nextToFinish);
@@ -121,7 +121,7 @@ public class MachineShopSimulator {
 	}
 
 	/** output wait times at machines */
-	static void outputStatistics() {
+	private static void outputStatistics() {
 		System.out.println("Finish time = " + timeNow);
 		for (int p = 0; p < numMachines; p++) {
 			int realIndex = p+1;
