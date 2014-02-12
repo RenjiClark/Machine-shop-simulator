@@ -3,20 +3,17 @@ package applications;
 import dataStructures.LinkedQueue;
 
 class Job {
-	// data members
 	private LinkedQueue taskQ; // this job's tasks
 	private int length; // sum of scheduled task times
 	private int arrivalTime; // arrival time at current queue
 	private int id; // job identifier
 
-	// constructor
 	Job(int theId) {
 		id = theId;
 		taskQ = new LinkedQueue();
 		// length and arrivalTime have default value 0
 	}
 
-	// other methods
 	void addTask(int theMachine, int theTime) {
 		taskQ.put(new Task(theMachine, theTime));
 	}
@@ -53,7 +50,5 @@ class Job {
 	int getId() {
 		return id;
 	}
-
-
-
+	
 }

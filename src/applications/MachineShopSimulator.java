@@ -7,12 +7,6 @@ import exceptions.MyInputException;
 
 public class MachineShopSimulator {
 
-	//public static final String NUMBER_OF_MACHINES_MUST_BE_AT_LEAST_1 = "number of machines must be >= 1";
-	//public static final String NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1 = "number of machines and jobs must be >= 1";
-	//public static final String CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0 = "change-over time must be >= 0";
-	//public static final String EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK = "each job must have >= 1 task";
-	//public static final String BAD_MACHINE_NUMBER_OR_TASK_TIME = "bad machine number or task time";
-
 	// data members of MachineShopSimulator
 	private static int timeNow; // current time
 	private static int numMachines; // number of machines
@@ -32,6 +26,7 @@ public class MachineShopSimulator {
 	//would need to be changed from "moveToNextMachine(theJob);" to
 	//"machineList.get(theJob.getFirstMachine()).moveToNextMachine(theJob);"
 	private static void moveToNextMachine(Job theJob) {
+		// get machine for next task
 		int p = theJob.getFirstMachine();
 		// put on machine p's wait queue
 		machineList.get(p).addToJobQ(theJob);
@@ -114,7 +109,7 @@ public class MachineShopSimulator {
 							+ timeNow + " Total wait was " + (timeNow - theJob.getLength()));
 					numJobs--;
 				} else{
-					moveToNextMachine(theJob); //machineList.get(theJob.getFirstMachine()).moveToNextMachine(theJob)
+					moveToNextMachine(theJob);
 				}
 			}
 		}

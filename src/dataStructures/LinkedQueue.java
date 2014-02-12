@@ -3,11 +3,9 @@
 package dataStructures;
 
 public class LinkedQueue implements Queue {
-	// data members
 	protected ChainNode front;
 	protected ChainNode rear;
 
-	// methods
 	/** @return true iff queue is empty */
 	public boolean isEmpty() {
 		return front == null;

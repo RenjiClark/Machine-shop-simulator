@@ -71,4 +71,5 @@ public class MachineList {
 		for (int p = 0; p < machineList.length; p++)
 			get(p).changeState(0);
 	}
+	
 }

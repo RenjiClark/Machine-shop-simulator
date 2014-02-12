@@ -71,5 +71,5 @@ class Machine {
 
 		return lastJob;
 	}
-
+	
 }

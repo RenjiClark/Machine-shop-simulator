@@ -2,11 +2,9 @@ package applications;
 
 // top-level nested classes
 class Task {
-	// data members
 	private int machine;
 	private int time;
 
-	// constructor
 	Task(int theMachine, int theTime) {
 		machine = theMachine;
 		time = theTime;
@@ -19,7 +17,4 @@ class Task {
 	int getTime() {
 		return time;
 	}
-
-
-
 }
