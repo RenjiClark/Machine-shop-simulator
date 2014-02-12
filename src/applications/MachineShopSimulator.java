@@ -91,11 +91,7 @@ public class MachineShopSimulator {
 		}
 	}
 
-	/** load first jobs onto each machine */
-	static void startShop() {
-		for (int p = 0; p < numMachines; p++)
-			machineList.get(p).changeState(timeNow);
-	}
+
 
 	/** process all jobs to completion */
 	static void simulate() {
@@ -146,7 +142,7 @@ public class MachineShopSimulator {
 		 */
 		timeNow = 0;
 		inputData(); // get machine and job data
-		startShop(); // initial machine loading
+		machineList.startShop(); // initial machine loading
 		simulate(); // run all jobs through shop
 		outputStatistics(); // output machine wait times
 	}

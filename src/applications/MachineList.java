@@ -48,15 +48,15 @@ public class MachineList {
     }
 
     
-    int getFinishTime(int theMachine) {
+    public int getFinishTime(int theMachine) {
         return machineList[theMachine].getFinishTime();
     }
 
-    void setFinishTime(int theMachine, int theTime) {
+    public void setFinishTime(int theMachine, int theTime) {
         machineList[theMachine].setFinishTime(theTime);
     }
     
-	void populateMachineList(MyInputStream keyboard) {
+	public void populateMachineList(MyInputStream keyboard) {
 		System.out.println("Enter change-over times for machines");
 		for (int i = 0; i < machineList.length; i++) {
 			int ct = keyboard.readInteger();
@@ -64,5 +64,11 @@ public class MachineList {
 				throw new MyInputException("change-over time must be >= 0");
 			add(new Machine(ct));
 		}
+	}
+	
+	/** load first jobs onto each machine */
+	public void startShop() {
+		for (int p = 0; p < machineList.length; p++)
+			get(p).changeState(0);
 	}
 }
