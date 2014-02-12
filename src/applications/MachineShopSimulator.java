@@ -59,19 +59,8 @@ public class MachineShopSimulator {
 
 		// create event and machine queues
 		machineList = new MachineList(numMachines);
-
-		populateMachineList(keyboard);
+		machineList.populateMachineList(keyboard);
 		inputJobData(keyboard);
-	}
-
-	private static void populateMachineList(MyInputStream keyboard) {
-		System.out.println("Enter change-over times for machines");
-		for (int i = 0; i < numMachines; i++) {
-			int ct = keyboard.readInteger();
-			if (ct < 0)
-				throw new MyInputException("change-over time must be >= 0");
-			machineList.add(new Machine(ct));
-		}
 	}
 
 	private static void inputJobData(MyInputStream keyboard) {
