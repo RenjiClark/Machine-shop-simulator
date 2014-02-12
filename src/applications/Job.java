@@ -3,40 +3,40 @@ package applications;
 import dataStructures.LinkedQueue;
 
 class Job {
-    // data members
-    private LinkedQueue taskQ; // this job's tasks
-    private int length; // sum of scheduled task times
-    private int arrivalTime; // arrival time at current queue
-    private int id; // job identifier
+	// data members
+	private LinkedQueue taskQ; // this job's tasks
+	private int length; // sum of scheduled task times
+	private int arrivalTime; // arrival time at current queue
+	private int id; // job identifier
 
-    // constructor
-    Job(int theId) {
-        id = theId;
-        taskQ = new LinkedQueue();
-        // length and arrivalTime have default value 0
-    }
+	// constructor
+	Job(int theId) {
+		id = theId;
+		taskQ = new LinkedQueue();
+		// length and arrivalTime have default value 0
+	}
 
-    // other methods
-    void addTask(int theMachine, int theTime) {
-        taskQ.put(new Task(theMachine, theTime));
-    }
+	// other methods
+	void addTask(int theMachine, int theTime) {
+		taskQ.put(new Task(theMachine, theTime));
+	}
 
-    /**
-     * remove next task of job and return its time also update length
-     */
-    int removeNextTask() {
-        int theTime = ((Task) taskQ.remove()).getTime();
-        length += theTime;
-        return theTime;
-    }
-    
-    boolean isTaskQEmpty(){
-    	return taskQ.isEmpty();
-    }
-    
-    int getFirstMachine(){
-    	return ((Task) taskQ.getFrontElement()).getMachine();
-    }
+	/**
+	 * remove next task of job and return its time also update length
+	 */
+	int removeNextTask() {
+		int theTime = ((Task) taskQ.remove()).getTime();
+		length += theTime;
+		return theTime;
+	}
+
+	boolean isTaskQEmpty(){
+		return taskQ.isEmpty();
+	}
+
+	int getFirstMachine(){
+		return ((Task) taskQ.getFrontElement()).getMachine();
+	}
 
 	int getLength() {
 		return length;

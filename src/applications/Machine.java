@@ -3,20 +3,20 @@ package applications;
 import dataStructures.LinkedQueue;
 
 class Machine {
-    // data members
-    private LinkedQueue jobQ; // queue of waiting jobs for this machine
-    private int changeTime; // machine change-over time
-    private int totalWait; // total delay at this machine
-    private int numTasks; // number of tasks processed on this machine
-    private Job activeJob; // job currently active on this machine
-    private int finishTime;
+	// data members
+	private LinkedQueue jobQ; // queue of waiting jobs for this machine
+	private int changeTime; // machine change-over time
+	private int totalWait; // total delay at this machine
+	private int numTasks; // number of tasks processed on this machine
+	private Job activeJob; // job currently active on this machine
+	private int finishTime;
 
-    // constructor    
-    Machine(int changeTime){
-    	this.jobQ = new LinkedQueue();
-    	this.changeTime = changeTime;
-    	finishTime = Integer.MAX_VALUE;
-    }
+	// constructor    
+	Machine(int changeTime){
+		this.jobQ = new LinkedQueue();
+		this.changeTime = changeTime;
+		finishTime = Integer.MAX_VALUE;
+	}
 
 	void setActiveJob(Job activeJob) {
 		this.activeJob = activeJob;
@@ -41,15 +41,15 @@ class Machine {
 	void addToJobQ(Job input){
 		jobQ.put(input);
 	}
-				
+
 	boolean isIdle(){
 		return activeJob == null;
 	}
-	
+
 	boolean isJobQEmpty(){
 		return jobQ.isEmpty();
 	}
-	
+
 	Job removeJob(){
 		return (Job) jobQ.remove();
 	}
@@ -61,10 +61,10 @@ class Machine {
 	public void setFinishTime(int finishTime) {
 		this.finishTime = finishTime;
 	}
-	
+
 	public Job changeState(int timeNow) {// Task on theMachine has finished,
 		// schedule next one.
-		
+
 		Job lastJob = activeJob;
 
 		if (isIdle()) {// in idle or change-over
@@ -87,5 +87,5 @@ class Machine {
 
 		return lastJob;
 	}
-	
+
 }
