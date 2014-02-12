@@ -18,39 +18,23 @@ class Machine {
 		finishTime = Integer.MAX_VALUE;
 	}
 
-	void setActiveJob(Job activeJob) {
-		this.activeJob = activeJob;
-	}
-
-	int getTotalWait() {
+	public int getTotalWait() {
 		return totalWait;
 	}
-
-	void setTotalWait(int totalWait) {
-		this.totalWait = totalWait;
-	}
-
-	int getNumTasks() {
+	
+	public int getNumTasks(){
 		return numTasks;
 	}
 
-	void setNumTasks(int numTasks) {
-		this.numTasks = numTasks;
-	}
-
-	void addToJobQ(Job input){
+	public void addToJobQ(Job input){
 		jobQ.put(input);
 	}
 
-	boolean isIdle(){
+	private boolean isIdle(){
 		return activeJob == null;
 	}
 
-	boolean isJobQEmpty(){
-		return jobQ.isEmpty();
-	}
-
-	Job removeJob(){
+	private Job removeJob(){
 		return (Job) jobQ.remove();
 	}
 
@@ -70,18 +54,18 @@ class Machine {
 		if (isIdle()) {// in idle or change-over
 			// state
 			// wait over, ready for new job
-			if (isJobQEmpty()) // no waiting job
+			if (jobQ.isEmpty()) // no waiting job
 				finishTime = Integer.MAX_VALUE;
 			else {// take job off the queue and work on it
-				setActiveJob(removeJob());
-				setTotalWait(getTotalWait() + (timeNow - activeJob.getArrivalTime()));
-				setNumTasks(getNumTasks() + 1);
+				activeJob = removeJob();
+				totalWait += (timeNow - activeJob.getArrivalTime());
+				numTasks += 1;
 				int t = activeJob.removeNextTask();
 				finishTime = timeNow + t;
 			}
 		} else {// task has just finished on currentMachine
 			// schedule change-over time
-			setActiveJob(null);
+			activeJob = null;
 			finishTime = timeNow + changeTime;
 		}
 
